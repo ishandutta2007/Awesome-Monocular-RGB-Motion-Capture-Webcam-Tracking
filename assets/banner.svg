@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="100%" height="360">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070913" />
+      <stop offset="50%" stop-color="#0d1127" />
+      <stop offset="100%" stop-color="#150a21" />
+    </linearGradient>
+
+    <!-- Glowing Accent Gradients -->
+    <linearGradient id="primaryGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="50%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+
+    <linearGradient id="accentCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="100%" stop-color="#4facfe" />
+    </linearGradient>
+
+    <radialGradient id="meshSphere" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8" />
+      <stop offset="60%" stop-color="#6366f1" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Grid Filter -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#312e81" stroke-width="0.75" stroke-opacity="0.25" />
+    </pattern>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    .bg-grid { fill: url(#grid); }
+    .title-text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 800;
+      font-size: 38px;
+      letter-spacing: -0.5px;
+      fill: #ffffff;
+    }
+    .subtitle-text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      fill: #94a3b8;
+      letter-spacing: 0.2px;
+    }
+    .tag-text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      fill: #e0e7ff;
+    }
+
+    /* Ambient Pulsing Glow */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50% { opacity: 0.65; transform: scale(1.08); }
+    }
+    .pulsing-aura {
+      transform-origin: 980px 180px;
+      animation: pulseGlow 6s ease-in-out infinite;
+    }
+
+    /* Kinematic Joint Tracking Animations */
+    @keyframes jointTrack {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      30% { transform: translateY(-8px) rotate(4deg); }
+      70% { transform: translateY(6px) rotate(-3deg); }
+    }
+    .rig-motion {
+      transform-origin: 980px 180px;
+      animation: jointTrack 7s ease-in-out infinite;
+    }
+
+    /* Floating Data Particles in background */
+    @keyframes driftPill1 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(12px, -15px); }
+    }
+    @keyframes driftPill2 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-10px, 12px); }
+    }
+    .particle-1 { animation: driftPill1 8s ease-in-out infinite; }
+    .particle-2 { animation: driftPill2 10s ease-in-out infinite; }
+
+    /* Scanline Sweep */
+    @keyframes scanline {
+      0% { transform: translateY(-80px); opacity: 0; }
+      50% { opacity: 0.7; }
+      100% { transform: translateY(380px); opacity: 0; }
+    }
+    .scan-ray {
+      animation: scanline 5s linear infinite;
+    }
+  </style>
+
+  <!-- Background Base -->
+  <rect width="100%" height="100%" fill="url(#bgGrad)" />
+  <rect width="100%" height="100%" class="bg-grid" />
+
+  <!-- Animated Background Glow Auras (Strictly behind text & foreground) -->
+  <circle cx="980" cy="180" r="140" fill="url(#meshSphere)" class="pulsing-aura" />
+  <circle cx="150" cy="70" r="120" fill="#4338ca" opacity="0.15" filter="url(#glow)" />
+  <circle cx="650" cy="300" r="160" fill="#6d28d9" opacity="0.12" filter="url(#glow)" />
+
+  <!-- Subtle Laser Scanning Ray in background -->
+  <line x1="820" y1="0" x2="1140" y2="0" stroke="url(#accentCyan)" stroke-width="1.5" stroke-opacity="0.6" class="scan-ray" />
+
+  <!-- Background Dynamic Kinematic 3D Pose Wireframe (Right Anchor) -->
+  <g class="rig-motion">
+    <!-- Camera Tracking Bounding Box -->
+    <rect x="840" y="55" width="280" height="250" rx="14" fill="#0f172a" fill-opacity="0.4" stroke="#38bdf8" stroke-width="1" stroke-dasharray="6,4" stroke-opacity="0.4" />
+    
+    <!-- Tracking Corner Reticles -->
+    <path d="M 850 75 L 850 65 L 860 65" fill="none" stroke="#38bdf8" stroke-width="2" />
+    <path d="M 1110 75 L 1110 65 L 1100 65" fill="none" stroke="#38bdf8" stroke-width="2" />
+    <path d="M 850 285 L 850 295 L 860 295" fill="none" stroke="#38bdf8" stroke-width="2" />
+    <path d="M 1110 285 L 1110 295 L 1100 295" fill="none" stroke="#38bdf8" stroke-width="2" />
+
+    <!-- 3D Kinematic Pose Skeleton (SMPL/MediaPipe abstraction) -->
+    <!-- Head / Cranium -->
+    <circle cx="980" cy="100" r="14" fill="#38bdf8" fill-opacity="0.25" stroke="#38bdf8" stroke-width="2" />
+    <!-- Neck & Spine -->
+    <line x1="980" y1="114" x2="980" y2="150" stroke="#818cf8" stroke-width="3" />
+    <line x1="980" y1="150" x2="980" y2="200" stroke="#818cf8" stroke-width="3.5" />
+    <!-- Clavicle / Shoulders -->
+    <line x1="940" y1="140" x2="1020" y2="140" stroke="#818cf8" stroke-width="3" />
+    <circle cx="940" cy="140" r="5" fill="#c084fc" />
+    <circle cx="1020" cy="140" r="5" fill="#c084fc" />
+    <!-- Left Arm -->
+    <line x1="940" y1="140" x2="910" y2="175" stroke="#6366f1" stroke-width="2.5" />
+    <line x1="910" y1="175" x2="890" y2="215" stroke="#6366f1" stroke-width="2" />
+    <circle cx="910" cy="175" r="4.5" fill="#38bdf8" />
+    <circle cx="890" cy="215" r="5" fill="#06b6d4" />
+    <!-- Right Arm -->
+    <line x1="1020" y1="140" x2="1055" y2="165" stroke="#6366f1" stroke-width="2.5" />
+    <line x1="1055" y1="165" x2="1075" y2="135" stroke="#6366f1" stroke-width="2" />
+    <circle cx="1055" cy="165" r="4.5" fill="#38bdf8" />
+    <circle cx="1075" cy="135" r="5" fill="#06b6d4" />
+    <!-- Pelvis & Hips -->
+    <line x1="955" y1="200" x2="1005" y2="200" stroke="#818cf8" stroke-width="3" />
+    <circle cx="955" cy="200" r="5" fill="#c084fc" />
+    <circle cx="1005" cy="200" r="5" fill="#c084fc" />
+    <!-- Left Leg -->
+    <line x1="955" y1="200" x2="945" y2="245" stroke="#4f46e5" stroke-width="2.5" />
+    <line x1="945" y1="245" x2="940" y2="285" stroke="#4f46e5" stroke-width="2" />
+    <circle cx="945" cy="245" r="4.5" fill="#38bdf8" />
+    <circle cx="940" cy="285" r="5" fill="#06b6d4" />
+    <!-- Right Leg -->
+    <line x1="1005" y1="200" x2="1015" y2="245" stroke="#4f46e5" stroke-width="2.5" />
+    <line x1="1015" y1="245" x2="1025" y2="285" stroke="#4f46e5" stroke-width="2" />
+    <circle cx="1015" cy="245" r="4.5" fill="#38bdf8" />
+    <circle cx="1025" cy="285" r="5" fill="#06b6d4" />
+    
+    <!-- Depth & Coordinate Grid Rings -->
+    <ellipse cx="980" cy="285" rx="60" ry="12" fill="none" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.5" stroke-dasharray="3,3" />
+  </g>
+
+  <!-- Ambient Floating Tech Badges (Non-obstructing, Upper and Lower Float) -->
+  <g class="particle-1">
+    <rect x="850" y="25" width="105" height="24" rx="12" fill="#1e1b4b" stroke="#6366f1" stroke-width="1" />
+    <text x="902" y="41" text-anchor="middle" class="tag-text">60 FPS REALTIME</text>
+  </g>
+  <g class="particle-2">
+    <rect x="1015" y="315" width="110" height="24" rx="12" fill="#064e3b" stroke="#10b981" stroke-width="1" stroke-opacity="0.6" />
+    <text x="1070" y="331" text-anchor="middle" class="tag-text" fill="#6ee7b7">SMPL-X / VMC</text>
+  </g>
+
+  <!-- FOREGROUND CONTENT: Safe from any animated overlap (X: 70 to 760) -->
+  <!-- Top Category Chip -->
+  <rect x="70" y="48" width="220" height="28" rx="14" fill="#1e1b4b" stroke="#818cf8" stroke-width="1" stroke-opacity="0.8" />
+  <circle cx="84" cy="62" r="4" fill="#38bdf8" />
+  <text x="96" y="66" class="tag-text" fill="#c7d2fe">AI COMPUTER VISION &amp; MOCAP</text>
+
+  <!-- Title & Primary Heading -->
+  <text x="70" y="128" class="title-text">
+    Awesome Monocular RGB
+  </text>
+  <text x="70" y="172" class="title-text" fill="url(#primaryGlow)">
+    Motion Capture &amp; Webcam Tracking
+  </text>
+
+  <!-- Subtitle / Meta Description -->
+  <text x="70" y="218" class="subtitle-text">
+    Curated SaaS products, open-source 3D pose estimators, and real-time webcam mocap
+  </text>
+  <text x="70" y="242" class="subtitle-text">
+    pipelines for Blender, Unreal Engine, Unity, and VTuber VRM avatars.
+  </text>
+
+  <!-- Feature Pills / Highlights in Foreground -->
+  <g transform="translate(70, 272)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="135" height="32" rx="16" fill="#1e293b" stroke="#475569" stroke-width="1" />
+    <text x="67" y="20" text-anchor="middle" class="tag-text">🎥 Single RGB Video</text>
+
+    <!-- Pill 2 -->
+    <rect x="145" y="0" width="145" height="32" rx="16" fill="#1e293b" stroke="#475569" stroke-width="1" />
+    <text x="217" y="20" text-anchor="middle" class="tag-text">⚡ Markerless AI MoCap</text>
+
+    <!-- Pill 3 -->
+    <rect x="300" y="0" width="130" height="32" rx="16" fill="#1e293b" stroke="#475569" stroke-width="1" />
+    <text x="365" y="20" text-anchor="middle" class="tag-text">🎭 VTuber &amp; VMC</text>
+
+    <!-- Pill 4 -->
+    <rect x="440" y="0" width="135" height="32" rx="16" fill="#1e293b" stroke="#475569" stroke-width="1" />
+    <text x="507" y="20" text-anchor="middle" class="tag-text">🦴 Mesh &amp; Keypoints</text>
+  </g>
+</svg>
